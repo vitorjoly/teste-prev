@@ -6,6 +6,9 @@
         - Docker
         - Docker-compose
 
+    * As rotas devem ser utilizadas apos criar o usuario com o seeder
+    * Na rota /login sera possivel pegar o token do usuario para usar nas outras rotas
+
     * Passo a passo
         1. Clonar o projeto e acessar a pasta do mesmo:
         git clone https://github.com/vitorjoly/teste-prev.git && cd teste-prev
