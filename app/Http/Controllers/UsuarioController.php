@@ -20,7 +20,15 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        return Usuario::create($request->all());
+        if(Usuario::create($request->all())) {
+            return response()->json([
+                'message' => 'Usuario criado com sucesso!'
+            ], 201);
+        }
+
+        return response()->json([
+            'message' => 'Erro ao criar usuario.'
+        ], 404);
     }
 
     /**
@@ -47,11 +55,18 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $usuario = Usuario::findOrFail($id);
+        $usuario = Usuario::find($id);
 
-        $usuario->update($request->all());
+        if($usuario) {
+            $usuario->update($request->all());
+            return response()->json([
+                'message' => 'Usuario alterado com sucesso!'
+            ], 201);
+        }
 
-        return $usuario;
+        return response()->json([
+            'message' => 'Erro ao alterar usuario.'
+        ], 404);
     }
 
     /**
@@ -59,6 +74,14 @@ class UsuarioController extends Controller
      */
     public function destroy(string $id)
     {
-        return Usuario::destroy($id);
+        if (Usuario::destroy($id)) {
+            return response()->json([
+                'message' => 'Usuario deletado com sucesso!'
+            ], 201);
+        }
+
+        return response()->json([
+            'message' => 'Erro ao remover usuario.'
+        ], 404);
     }
 }
