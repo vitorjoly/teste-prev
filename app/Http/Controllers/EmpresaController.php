@@ -22,7 +22,15 @@ class EmpresaController extends Controller
     public function store(Request $request)
     {
         //Cria a empresa no banco de acordo com a requisicao
-        return Empresa::create($request->all());
+        if (Empresa::create($request->all())) {
+            return response()->json([
+                'message' => 'Empresa cadastrada com sucesso!'
+            ], 201);
+        }
+
+        return response()->json([
+            'message' => 'Erro ao cadastrar empresa.'
+        ], 404);
     }
 
     /**
@@ -53,9 +61,16 @@ class EmpresaController extends Controller
     {
         $empresa = Empresa::findOrFail($id);
 
-        $empresa->update($request->all());
+        if ($empresa) {
+            $empresa->update($request->all());
+            return response()->json([
+                'message' => 'Empresa atualizada com sucesso!'
+            ], 201);
+        }
 
-        return $empresa;
+        return response()->json([
+            'message' => 'Erro ao atualizar empresa.'
+        ], 404);
     }
 
     /**
@@ -63,6 +78,14 @@ class EmpresaController extends Controller
      */
     public function destroy(string $id)
     {
-        return Empresa::destroy($id);
+        if (Empresa::destroy($id)) {
+            return response()->json([
+                'message' => 'Empresa excluida com sucesso!'
+            ], 201);
+        }
+
+        return response()->json([
+            'message' => 'Erro ao excuir empresa.'
+        ], 404);
     }
 }

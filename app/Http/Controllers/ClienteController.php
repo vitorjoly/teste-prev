@@ -75,6 +75,14 @@ class ClienteController extends Controller
      */
     public function destroy(string $id)
     {
-        return Cliente::destroy($id);
+        if (Cliente::destroy($id)) {
+            return response()->json([
+                'message' => 'Cliente excluido com sucesso!'
+            ], 201);
+        }
+
+        return response()->json([
+            'message' => 'Erro ao excluir cliente.'
+        ], 404);
     }
 }
