@@ -10,14 +10,25 @@
         1. Clonar o projeto e acessar a pasta do mesmo:
         git clone https://github.com/vitorjoly/teste-prev.git && cd teste-prev
 
-        2. Dar permissao na storage:
+        2. Instalar as bibliotecas PHP com 'composer install'
+
+        3. Instalar as bibliotecas JavaScript com 'npm install'
+
+        4. Compilar os arquivos js e css com 'npm run dev'
+
+        5. Dar permissao na storage:
         sudo chmod -R 777 storage
 
-        3. Copiar o env.example para .env:
+        6. Copiar o env.example para .env:
         cp .env.example .env
-
-        4. Buildar o docker:
+        
+        7. Buildar o docker:
         sail up -d
 
-        5. Acessar no navegador:
+        8. Rodar as migrations do banco:
+        sail artisan migrate
+
+        9. Crie o usuario admin atraves do comando 'sail artisan db:seed', o email e 'admin@admin.com' e a senha 'admin123';
+
+        10. Acessar no navegador:
         http://localhost
